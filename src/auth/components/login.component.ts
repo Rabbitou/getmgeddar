@@ -1,44 +1,122 @@
-import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { NgIf } from "@angular/common";
+import { Component, OnInit, inject } from "@angular/core";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { AuthService } from "../auth.service";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'mg-login',
+  selector: "mg-login",
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule,ReactiveFormsModule,NgIf],
-  template: `<div class="flex justify-center items-center h-screen">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" formControlName="email">
-        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-          <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</div>
-          <div *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</div>
-        </div>
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    NgIf,
+  ],
+  template: `<div
+    class="flex justify-center items-center min-h-screen bg-gray-100"
+  >
+    <div class="bg-gray-500 p-8 rounded shadow-md w-full max-w-md">
+      <h1 class="text-2xl font-bold mb-4">Login</h1>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="w-full">
+          <input
+            matInput
+            placeholder="Email"
+            type="email"
+            id="email"
+            formControlName="email"
+          />
+          <mat-error
+            *ngIf="
+              loginForm.controls['email'].invalid &&
+              loginForm.controls['email'].touched
+            "
+          >
+            Please enter a valid email address.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <input
+            matInput
+            placeholder="Password"
+            type="password"
+            id="password"
+            formControlName="password"
+          />
+          <mat-error
+            *ngIf="
+              loginForm.controls['password'].invalid &&
+              loginForm.controls['password'].touched
+            "
+          >
+            Please enter your password.
+          </mat-error>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          type="submit"
+          [disabled]="loginForm.invalid"
+          color="primary"
+          class="w-full mt-4"
+        >
+          Login
+        </button>
+      </form>
+      <div class="mt-2 text-center">
+        <button mat-button color="accent" (click)="navigateToSignup()">
+          Sign Up
+        </button>
       </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" formControlName="password">
-        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-          <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
-        </div>
-      </div>
-      <button type="submit" [disabled]="loginForm.invalid">Login</button>
-    </form>
+    </div>
   </div>`,
 })
 export class LoginComponent {
-  // ngOnInit() {
-    loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required)
-    });
+  loginForm: FormGroup;
+  // constructor() {}
+  // ngOnInit(): void {
+  //   this.loginForm = new FormGroup({
+  //     email: new FormControl("", [Validators.required, Validators.email]),
+  //     password: new FormControl("", Validators.required),
+  //   });
   // }
+  constructor(
+    private authService: AuthService,
+    private formBuilder: FormBuilder
+  ) {
+    this.loginForm = this.formBuilder.group({
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", Validators.required],
+    });
+  }
+
+  private router: Router = inject(Router);
+
   onSubmit() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
+      const { email, password } = this.loginForm.value;
+      this.authService
+        .login(email, password)
+        .then((userCredential) => {
+          console.log("Logged in successfully:", userCredential.user);
+        })
+        .catch((error) => {
+          console.error("Error logging in:", error);
+        });
     }
+  }
+
+  navigateToSignup() {
+    this.router.navigateByUrl("/signup");
   }
 }
