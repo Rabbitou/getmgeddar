@@ -1,0 +1,35 @@
+<div class="container mx-10 pt-8 justify-center items-center text-white">
+  <div class="containAside md:grid gap-5 grid-cols-8 justify-center">
+    <aside
+      class="col-span-2 p-10 text-center justify-center bg-white bg-opacity-80 rounded-md max-md:my-5"
+    >
+      <ul class="items-center">
+        <li class="flex justify-center items-center">
+          <img class="" src="../../../assets/icons8-user-96.png" alt="" />
+        </li>
+        <li class="my-6 text-sm md:text-xs lg:text-sm text-black">
+          {{ emailUser }}
+        </li>
+        <li>
+          <button mat-raised-button color="warn" (click)="signOut()">
+            Logout
+          </button>
+        </li>
+      </ul>
+    </aside>
+    <div class="col-span-6">
+      <div
+        class="flex text-lg flex-col bg-gray-600 bg-opacity-80 p-10 rounded-md"
+      >
+        <h2>My Fitness</h2>
+        <div>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Voluptatibus tempore fugiat similique odio a dicta velit
+            reprehenderit pariatur optio! Voluptatibus?
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

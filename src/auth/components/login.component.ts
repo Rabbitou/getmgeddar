@@ -24,7 +24,7 @@ import { Router } from "@angular/router";
     NgIf,
   ],
   template: `<div
-    class="flex justify-center items-center min-h-screen bg-gray-100"
+    class="flex justify-center items-center min-h-screen bg-gradient-primary"
   >
     <div class="bg-gray-500 p-8 rounded shadow-md w-full max-w-md">
       <h1 class="text-2xl font-bold mb-4">Login</h1>
@@ -109,6 +109,7 @@ export class LoginComponent {
         .login(email, password)
         .then((userCredential) => {
           console.log("Logged in successfully:", userCredential.user);
+          this.router.navigateByUrl("/home");
         })
         .catch((error) => {
           console.error("Error logging in:", error);

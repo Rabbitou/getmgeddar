@@ -9,6 +9,7 @@ import {
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
+import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -22,7 +23,7 @@ import { Router } from "@angular/router";
     NgIf,
   ],
   template: `<div
-    class="flex justify-center items-center min-h-screen bg-gray-100"
+    class="flex justify-center items-center min-h-screen bg-gradient-primary"
   >
     <div class="bg-gray-500 p-8 rounded shadow-md w-full max-w-md">
       <h1 class="text-2xl font-bold mb-4">Sign Up</h1>
@@ -82,7 +83,7 @@ import { Router } from "@angular/router";
 export class SignupComponent {
   signupForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,private authService: AuthService,) {
     this.signupForm = this.formBuilder.group({
       email: ["", [Validators.required, Validators.email]],
       password: ["", Validators.required],
@@ -101,6 +102,15 @@ export class SignupComponent {
         "and password:",
         password
       );
+      this.authService
+      .signup(email, password)
+      .then((userCredential) => {
+        console.log("Logged in successfully:", userCredential.user);
+        this.router.navigateByUrl("/home");
+      })
+      .catch((error) => {
+        console.error("Error logging in:", error);
+      });
     }
   }
 

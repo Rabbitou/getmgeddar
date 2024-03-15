@@ -1,0 +1,13 @@
+<div class="mt-10 text-center">
+  <span
+    class="text-2xl font-bold mb-4 text-center bg-white bg-opacity-70 p-5 rounded-md"
+  >
+    Subscription Plans
+  </span>
+  <div class="grid grid-cols-3 text-left justify-center items-center">
+    <mg-subscription-plan
+      *ngFor="let plan of subscriptionPlans"
+      [plan]="plan"
+    ></mg-subscription-plan>
+  </div>
+</div>

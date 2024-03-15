@@ -1,0 +1,17 @@
+<mat-card
+  class="m-5 max-w-[300px] hover:translate-x-1 hover:translate-y-[-4px] transition-all rounded-md col-span-1"
+>
+  <mat-card-header class="bg-slate-300 rounded-t-sm">
+    <mat-card-title class="text-black">{{ plan.name }}</mat-card-title>
+    <mat-card-subtitle
+      ><p class="text-gray-600">Price: {{ plan.price }}$</p></mat-card-subtitle
+    >
+  </mat-card-header>
+  <mat-card-content class="mt-4">
+    <ul>
+      <li *ngFor="let feature of plan.features" class="text-gray-200">
+        {{ feature | titlecase }}
+      </li>
+    </ul>
+  </mat-card-content>
+</mat-card>

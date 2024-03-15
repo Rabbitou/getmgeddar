@@ -3,5 +3,14 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+
+* {margin: 0; padding: 0;}
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    height: 100%;
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+    background: linear-gradient(to right, #7b4397, #dc2430);
+    background-image: url("assets/motivation_fitness_workout-wallpaper-1920x1080.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
