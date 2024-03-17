@@ -1,15 +1,15 @@
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/auth/auth.service';
-import { SubscriptionPlan } from 'src/environments/subscription-plan';
+import { Component, inject } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthService } from "src/auth/auth.service";
+import { SubscriptionPlan } from "src/environments/subscription-plan";
 
 @Component({
-  selector: 'mg-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: "mg-home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent {
-  emailUser: string = '';
+  emailUser: string = "";
   constructor(private authService: AuthService) {
     this.authService.getAuthState().subscribe((state) => {
       if (state?.email) {
@@ -22,6 +22,6 @@ export class HomeComponent {
 
   signOut() {
     this.authService.signOut();
-    this.router.navigateByUrl('auth/login');
+    this.router.navigateByUrl("auth/login");
   }
 }

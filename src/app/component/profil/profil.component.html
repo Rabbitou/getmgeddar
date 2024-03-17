@@ -1,3 +1,20 @@
 <div class="w-full">
   <mg-motivational-quotes></mg-motivational-quotes>
+  <aside
+    class="col-span-2 p-10 text-center justify-center bg-white bg-opacity-30 rounded-md max-md:my-5"
+  >
+    <ul class="items-center">
+      <li class="flex justify-center items-center">
+        <img class="" src="../../../assets/icons8-user-96.png" alt="" />
+      </li>
+      <li class="my-6 text-sm md:text-xs lg:text-sm text-black">
+        {{ emailUser }}
+      </li>
+      <li>
+        <button mat-raised-button color="warn" (click)="signOut()">
+          Logout
+        </button>
+      </li>
+    </ul>
+  </aside>
 </div>

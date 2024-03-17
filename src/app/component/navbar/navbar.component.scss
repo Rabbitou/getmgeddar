@@ -1,12 +1,16 @@
 .navAnchor > a {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    padding: 0 20px;
-    transition-duration: 0.3s;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 0 20px;
+  transition-duration: 0.3s;
 }
 
 .navAnchor > a:hover {
-    background-color: #9333ea;
+  background-color: #9333ea;
+}
+
+.userIcon:hover {
+  background-color: #9333ea;
 }

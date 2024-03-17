@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    component: AppComponent,
+    component: HomeComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -26,17 +26,17 @@ const routes: Routes = [
   {
     path: "home",
     canActivate: [AuthGuard],
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: "plan",
     canActivate: [AuthGuard],
-    component: PlanComponent
+    component: PlanComponent,
   },
   {
     path: "profil",
     canActivate: [AuthGuard],
-    component: ProfilComponent
+    component: ProfilComponent,
   },
 ];
 

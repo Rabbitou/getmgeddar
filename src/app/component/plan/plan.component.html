@@ -4,7 +4,9 @@
   >
     Subscription Plans
   </span>
-  <div class="grid grid-cols-3 text-left justify-center items-center">
+  <div
+    class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 text-left justify-center items-center"
+  >
     <mg-subscription-plan
       *ngFor="let plan of subscriptionPlans"
       [plan]="plan"
