@@ -1,6 +1,13 @@
-<div class="">
-  <div class="text-2xl text-white">Profil Component</div>
+<div class="flex flex-col justify-center items-center text-center gap-3">
   <button mat-raised-button color="warn" (click)="fetchMotivationalQuote()">
     Get Motivational Quote
   </button>
+  <div class="bg-gray-700/80 rounded-md">
+    <p
+      class="quoteP text-white p-5 text-ellipsis overflow-hidden"
+      [innerHTML]="quoteP"
+    >
+      <!-- {{ quoteP }} -->
+    </p>
+  </div>
 </div>
